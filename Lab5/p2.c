@@ -5,6 +5,7 @@
 int** addMatrices(int m1[SIZE][SIZE], int m2[SIZE][SIZE]) {
     int **result = malloc(SIZE * sizeof(int *));
     for (int i = 0; i < SIZE; i++) {
+        result[i] = malloc(SIZE * sizeof(int));
         for (int j = 0; j < SIZE; j++) {
             result[i][j] = m1[i][j] + m2[i][j];
         }
@@ -12,16 +13,13 @@ int** addMatrices(int m1[SIZE][SIZE], int m2[SIZE][SIZE]) {
     return result;
 }
 
+
 int** multiplyMatrices(int m1[SIZE][SIZE], int m2[SIZE][SIZE]) {
     int **result = malloc(SIZE * sizeof(int *));
     for (int i = 0; i < SIZE; i++) {
+        result[i] = malloc(SIZE * sizeof(int));
         for (int j = 0; j < SIZE; j++) {
             result[i][j] = 0;
-        }
-    }
-
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
             for (int k = 0; k < SIZE; k++) {
                 result[i][j] += m1[i][k] * m2[k][j];
             }
@@ -33,20 +31,23 @@ int** multiplyMatrices(int m1[SIZE][SIZE], int m2[SIZE][SIZE]) {
 int** transposeMatrix(int m[SIZE][SIZE]) {
     int **result = malloc(SIZE * sizeof(int *));
     for (int i = 0; i < SIZE; i++) {
+        result[i] = malloc(SIZE * sizeof(int));
         for (int j = 0; j < SIZE; j++) {
-            result[j][i] = m[i][j];
+            result[i][j] = m[j][i];
         }
     }
+    return result;
 }
 
-void printMatrix(int **matrix) {
+void printMatrix(int **m) {
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
-            printf("%d ", matrix[i][j]);
+            printf("%d ", m[i][j]);
         }
         printf("\n");
     }
 }
+
 
 
 
@@ -67,12 +68,10 @@ int main() {
         {5, 4, 3, 2, 1}
     };
 
-        // Perform matrix operations
     int **sum = addMatrices(m1, m2);
     int **product = multiplyMatrices(m1, m2);
     int **transposed = transposeMatrix(m1);
 
-    // Print results
     printf("Sum:\n");
     printMatrix(sum);
     printf("Product:\n");
@@ -80,8 +79,9 @@ int main() {
     printf("Transposed:\n");
     printMatrix(transposed);
 
-    // Free allocated memory
-    for (int i = 0; i < SIZE; i++) {
+
+
+    for (int i = 0; i < SIZE; i++) { //free the memory by iterating through each [row][col] of each result matrix
         free(sum[i]);
         free(product[i]);
         free(transposed[i]);
