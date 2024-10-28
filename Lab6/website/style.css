@@ -1,0 +1,19 @@
+body {
+    background-color: rgb(255, 255, 255);
+    color: black;
+    font-family: arial;
+    font-size: 18pt;
+    background-image: url("pictures/background.jpg");
+    background-size: 100%;
+    cursor: url("pictures/worm.cur"), auto;
+}
+
+body:hover {
+    background-color: rgb(255, 255, 255);
+    color: black;
+    font-family: arial;
+    font-size: 18pt;
+    background-image: url("pictures/background.jpg");
+    background-size: 100%;
+    cursor: url("pictures/worm.cur"), auto;
+}
